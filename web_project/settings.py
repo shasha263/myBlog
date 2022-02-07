@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -132,11 +133,28 @@ EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_PORT=587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER= 'testing770263@gmail.com'
-EMAIL_HOST_PASSWORD= 'testing321'
+EMAIL_HOST_USER= os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD= os.environ.get('EMAIL_PASS')
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+#AWS_S3_REGION_NAME= os.environ.get('AWS_S3_REGION_NAME')
+
+AWS_S3_FILE_OVERWRITE=False
+AWS_DEFAULT_ACL = None
+
+DEFAULT_FILE_STORAGE= 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_ADDRESSING_STYLE = "virtual"
+
+
+
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
